@@ -1,25 +1,25 @@
 version: '3'
 
 services: 
-    customerapp:
+    rentalapp:
         build: .
         volumes:
             - ./:/var/www
         depends_on: 
-            - customerapp-mysql
-            - customerapp-redis
+            - rentalapp-mysql
+            - rentalapp-redis
 
-    customerapp-nginx:
+    rentalapp-nginx:
         build: ./.docker/nginx
         restart: always
         ports: 
-            - "8002:80"
+            - "8003:80"
         volumes:
             - "./:/var/www"
         depends_on: 
-            - customerapp
+            - rentalapp
 
-    customerapp-mysql:
+    rentalapp-mysql:
         image: mysql:5.7.22
         command: --innodb-use-native-aio=0
         restart: always
@@ -28,10 +28,10 @@ services:
         volumes:
             - "./.docker/dbdata:/var/lib/mysql"
         environment: 
-            MYSQL_DATABASE: customerapp
+            MYSQL_DATABASE: rentalapp
             MYSQL_ROOT_PASSWORD: root
 
-    customerapp-redis:
+    rentalapp-redis:
         image: redis:alpine
         expose: 
             - 6379

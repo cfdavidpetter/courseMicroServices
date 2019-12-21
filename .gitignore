@@ -2,3 +2,5 @@
 !/product_service/.docker/dbdata/.gitkeep
 /customer_service/.docker/dbdata/*
 !/customer_service/.docker/dbdata/.gitkeep
+/rental_service/.docker/dbdata/*
+!/rental_service/.docker/dbdata/.gitkeep
