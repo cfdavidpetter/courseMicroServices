@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Observers\{ OrderObserver, OrderItemObserver, PaymentObserver };
+use App\{ Order, OrderItem, Payment };
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Order::observe(OrderObserver::class);
+        OrderItem::observe(OrderItemObserver::class);
+        Payment::observe(PaymentObserver::class);
     }
 }
