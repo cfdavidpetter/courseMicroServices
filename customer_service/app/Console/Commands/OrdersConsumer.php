@@ -42,10 +42,9 @@ class OrdersConsumer extends Command
         $conf = new \RdKafka\Conf();
         $conf->set('group.id', 'orders-group');
         $conf->set('metadata.broker.list', 'kafka:9092');
-        $conf->set('auto.offset.reset', 'largest');
+        $conf->set('auto.offset.reset', 'latest');
         $conf->set('enable.auto.commit', 'true');
         $conf->set('offset.store.method', 'broker');
-        $conf->set('auto.commit.interval.ms', '100');
 
         $consumer = new \RdKafka\KafkaConsumer($conf);
         $consumer->subscribe(['orders']);
