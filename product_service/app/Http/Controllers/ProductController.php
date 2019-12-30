@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 
 class ProductController extends Controller
 {
@@ -13,29 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-        dd('asdasd');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return response()->json(Product::paginate(15), 200);
     }
 
     /**
@@ -46,18 +25,18 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json(Product::findOrFail($id), 200);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Store a newly created resource in storage.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function store(Request $request)
     {
-        //
+        return response()->json([], 201);
     }
 
     /**
@@ -69,7 +48,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return response()->json([], 200);
     }
 
     /**
@@ -80,6 +59,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response()->json([], 200);
     }
 }
