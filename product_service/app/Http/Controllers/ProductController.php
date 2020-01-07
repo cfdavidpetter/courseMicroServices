@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use Ramsey\Uuid\Uuid;
 use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
@@ -37,7 +38,9 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        return response()->json([], 201);
+        return response()->json(Product::create(
+            array_merge($request->all(), ['id' => Uuid::uuid4()])
+        ), 201);
     }
 
     /**
