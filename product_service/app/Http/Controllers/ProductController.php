@@ -52,7 +52,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return response()->json([], 200);
+        $Product = Product::findOrFail($id);
+        $Product->fill($request->all());
+        $Product->save();
+
+        return response()->json($Product, 200);
     }
 
     /**
@@ -63,6 +67,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        return response()->json([], 200);
+        return response()->json(Product::destroy($id), 200);
     }
 }
