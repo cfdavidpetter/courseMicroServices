@@ -3,11 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\Uuids;
 
 class Product extends Model
 {
-    use Uuids;
     
     public $incrementing = false;
     
@@ -17,6 +15,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'name',
         'price',
     ];

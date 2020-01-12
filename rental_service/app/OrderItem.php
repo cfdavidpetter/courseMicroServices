@@ -3,11 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\Uuids;
 
 class OrderItem extends Model
 {
-    use Uuids;
     
     public $incrementing = false;
     
@@ -17,6 +15,7 @@ class OrderItem extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'order_id',
         'product_id',
         'qtd',

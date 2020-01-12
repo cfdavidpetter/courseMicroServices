@@ -36,7 +36,7 @@ class ProductObserver
     public function updated(Product $product)
     {
         Log::info('ProductObserver -> updated');
-        $this->ProductKafka->sendKafka($product, ['type' => 'updated']);
+        $this->ProductKafka->sendKafka($product, ['type' => 'update']);
     }
 
     /**
@@ -48,6 +48,6 @@ class ProductObserver
     public function deleted(Product $product)
     {
         Log::info('ProductObserver -> deleted');
-        $this->ProductKafka->sendKafka($product, ['type' => 'deleted']);
+        $this->ProductKafka->sendKafka($product, ['type' => 'delete']);
     }
 }
