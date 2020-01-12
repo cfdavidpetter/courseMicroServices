@@ -37,7 +37,7 @@ class ProductsConsumer extends Command
      */
     public function handle()
     {
-        echo "Order Consumer Initiate \n";
+        echo "Product Consumer Initiate \n";
 
         $conf = new \RdKafka\Conf();
         $conf->set('group.id', 'products-group');

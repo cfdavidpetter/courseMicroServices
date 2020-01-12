@@ -3,9 +3,18 @@
 namespace App\Observers;
 
 use App\Product;
+use App\Services\ProductKafka;
+use Illuminate\Support\Facades\Log;
+
 
 class ProductObserver
 {
+    protected $ProductKafka;
+
+    function __construct(ProductKafka $ProductKafka) {
+        $this->ProductKafka = $ProductKafka;
+    }
+
     /**
      * Handle the product "created" event.
      *
@@ -14,7 +23,8 @@ class ProductObserver
      */
     public function created(Product $product)
     {
-        //
+        Log::info('ProductObserver -> created');
+        $this->ProductKafka->sendKafka($product, ['type' => 'create']);
     }
 
     /**
@@ -25,7 +35,8 @@ class ProductObserver
      */
     public function updated(Product $product)
     {
-        //
+        Log::info('ProductObserver -> updated');
+        $this->ProductKafka->sendKafka($product, ['type' => 'updated']);
     }
 
     /**
@@ -36,6 +47,7 @@ class ProductObserver
      */
     public function deleted(Product $product)
     {
-        //
+        Log::info('ProductObserver -> deleted');
+        $this->ProductKafka->sendKafka($product, ['type' => 'deleted']);
     }
 }
