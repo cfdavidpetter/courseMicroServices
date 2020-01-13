@@ -1,5 +1,9 @@
 # Course Micro Services
 
+Start project:
+
+    docker-compose up
+
 Para criar uma networks:
 
     docker network create microservices-network
