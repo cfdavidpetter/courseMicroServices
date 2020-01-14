@@ -44,7 +44,7 @@ class Kafka
         $this->conf->set('group.id', 'rental' . $nameTopic . '-group');
 
         $consumer = new \RdKafka\KafkaConsumer($this->conf);
-        $consumer->subscribe(['products']);
+        $consumer->subscribe([$nameTopic]);
         $this->receiveMessage = $consumer;
 
         echo "Waiting for partition assignment... \n";

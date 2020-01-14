@@ -18,6 +18,6 @@ class CustomerKafka extends Kafka
             'parameters' => $parameters
         ];
 
-        $this->producer($Message, 'customer');
+        $this->producer($Message, 'customers');
     }
 }

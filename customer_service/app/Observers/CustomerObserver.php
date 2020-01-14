@@ -23,7 +23,7 @@ class CustomerObserver
     public function created(Customer $customer)
     {
         Log::info('CustomerObserver -> created');
-        $this->CustomerKafka->sendKafka($Customer, ['type' => 'create']);
+        $this->CustomerKafka->sendKafka($customer, ['type' => 'create']);
     }
 
     /**
@@ -35,7 +35,7 @@ class CustomerObserver
     public function updated(Customer $customer)
     {
         Log::info('CustomerObserver -> updated');
-        $this->CustomerKafka->sendKafka($Customer, ['type' => 'update']);
+        $this->CustomerKafka->sendKafka($customer, ['type' => 'update']);
     }
 
     /**
@@ -47,6 +47,6 @@ class CustomerObserver
     public function deleted(Customer $customer)
     {
         Log::info('CustomerObserver -> deleted');
-        $this->CustomerKafka->sendKafka($Customer, ['type' => 'delete']);
+        $this->CustomerKafka->sendKafka($customer, ['type' => 'delete']);
     }
 }
