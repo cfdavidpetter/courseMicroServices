@@ -24,7 +24,7 @@ class Kafka
 
     public function producer($message, $nameTopic)
     {
-        $this->conf->set('group.id', 'rental' . $nameTopic . '-group');
+        $this->conf->set('group.id', 'customer' . $nameTopic . '-group');
 
         $producer = new \RdKafka\Producer($this->conf);
         $topic = $producer->newTopic($nameTopic);
@@ -41,7 +41,7 @@ class Kafka
 
     public function consumer($nameTopic)
     {
-        $this->conf->set('group.id', 'rental' . $nameTopic . '-group');
+        $this->conf->set('group.id', 'customer' . $nameTopic . '-group');
 
         $consumer = new \RdKafka\KafkaConsumer($this->conf);
         $consumer->subscribe(['products']);
