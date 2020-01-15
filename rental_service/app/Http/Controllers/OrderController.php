@@ -52,11 +52,21 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $Order = Order::findOrFail($id);
-        $Order->fill($request->all());
-        $Order->save();
+        try {
+            DB::beginTransaction();
 
-        return response()->json($Order, 200);
+            $Order = Order::findOrFail($id);
+            $Order->fill($request->all());
+            $Order->save();
+            
+            DB::commit();
+            return response()->json($Order, 200);
+        } catch (\Throwable $th) {
+
+            DB::rollBack();
+            return response()->json($th->getMessage(), 500);
+        }
+
     }
 
     /**
