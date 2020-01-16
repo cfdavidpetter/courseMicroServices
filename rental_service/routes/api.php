@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('orders', 'OrderController')->except(['create', 'edit']);
+Route::resource('payments', 'PaymentController')->except(['create', 'edit']);

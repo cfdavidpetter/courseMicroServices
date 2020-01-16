@@ -23,6 +23,14 @@ class Order extends Model
         'order_date',
     ];
 
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($order) { // before delete() method call this
+             $order->items()->delete();
+        });
+    }
+
     /**
      * Eloquent: Relationships
      */

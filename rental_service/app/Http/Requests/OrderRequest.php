@@ -24,11 +24,17 @@ class OrderRequest extends CustomFormRequest
     public function rules()
     {
         return [
-            'name'          => 'required|max:255',
-            'description'   => 'required|max:255',
-            'price'         => 'required',
-            'qtd_available' => 'required',
-            'qtd_total'     => 'required',
+            'customer_id'   => 'required',
+            'status'        => 'required',
+            'discount'      => 'required',
+            'downpayment'   => 'required',
+            'delivery_fee'  => 'required',
+            'late_fee'      => 'required',
+            'order_date'    => 'required',
+            'return_date'   => 'required',
+
+            'items.*.product_id'    => 'required',
+            'items.*.qtd'           => 'required',
         ];
     }
 }

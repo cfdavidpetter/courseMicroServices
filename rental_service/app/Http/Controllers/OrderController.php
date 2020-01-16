@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
+use Validator;
 use App\Order;
+use App\OrderItem;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Http\Request;
 use App\Http\Requests\OrderRequest;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -38,9 +43,24 @@ class OrderController extends Controller
      */
     public function store(OrderRequest $request)
     {
-        return response()->json(Order::create(
-            array_merge($request->all(), ['id' => Uuid::uuid4()])
-        ), 201);
+        try {
+            DB::beginTransaction();
+            
+            $Order = Order::create(array_merge($request->all(), ['id' => Uuid::uuid4()]));
+            foreach ($request->items as $Item) {
+                OrderItem::create(array_merge($Item, [
+                    'id'        => Uuid::uuid4(),
+                    'order_id'  => $Order->id,
+                ]));
+            }
+
+            DB::commit();
+            return response()->json(Order::with('items')->findOrFail($Order->id), 201);
+        } catch (\Throwable $th) {
+
+            DB::rollBack();
+            return response()->json($th->getMessage(), 500);
+        }
     }
 
     /**
@@ -58,9 +78,18 @@ class OrderController extends Controller
             $Order = Order::findOrFail($id);
             $Order->fill($request->all());
             $Order->save();
+
+            //Itens
+            $Order->items()->delete();
+            foreach ($request->items as $Item) {
+                OrderItem::create(array_merge($Item, [
+                    'id'        => Uuid::uuid4(),
+                    'order_id'  => $Order->id,
+                ]));
+            }
             
             DB::commit();
-            return response()->json($Order, 200);
+            return response()->json(Order::with('items')->findOrFail($Order->id), 200);
         } catch (\Throwable $th) {
 
             DB::rollBack();
