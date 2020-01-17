@@ -4,7 +4,7 @@ Start project:
 
     docker-compose up
 
-Entrar na workspace
+Entrar na workspace:
 
     docker-compose exec customerapp bash
     docker-compose exec productapp bash
