@@ -2,7 +2,7 @@ version: '3'
 
 services: 
     customerapp:
-        build: .
+        build: ./.docker/service
         volumes:
             - ./:/var/www
         depends_on: 

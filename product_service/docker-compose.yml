@@ -2,7 +2,7 @@ version: '3'
 
 services: 
     productapp:
-        build: .
+        build: ./.docker/service
         volumes:
             - ./:/var/www
         depends_on: 
