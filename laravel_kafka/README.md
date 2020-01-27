@@ -1,6 +1,4 @@
-# Course Microservices
-
-## Microservices com Laravel, Kafka e Docker
+# Microservices com Laravel, Kafka e Docker
 
 Start project:
 
